@@ -31,12 +31,11 @@ class ArticleViewSet(viewsets.ModelViewSet):
         serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data)
     
-    # Remove the create method or modify it to use perform_create
-    # If you want to keep your custom create method:
+    
     def create(self, request):
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid():
-            # Use perform_create instead of directly calling save()
+          
             self.perform_create(serializer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
